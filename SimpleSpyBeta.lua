@@ -1845,12 +1845,14 @@ local function disablehooks()
     else
         if hookmetamethod then
             hookmetamethod(game,"__namecall",originalnamecall)
-        else
+        elseif hookfunction then
             hookfunction(getrawmetatable(game).__namecall,originalnamecall)
         end
-        hookfunction(Instance.new("RemoteEvent").FireServer, originalEvent)
-        hookfunction(Instance.new("RemoteFunction").InvokeServer, originalFunction)
-        hookfunction(Instance.new("UnreliableRemoteEvent").FireServer, originalUnreliableEvent)
+        if hookfunction then
+            hookfunction(Instance.new("RemoteEvent").FireServer, originalEvent)
+            hookfunction(Instance.new("RemoteFunction").InvokeServer, originalFunction)
+            hookfunction(Instance.new("UnreliableRemoteEvent").FireServer, originalUnreliableEvent)
+        end
     end
 end
 
@@ -1866,12 +1868,14 @@ function toggleSpy()
         else
             if hookmetamethod then
                 oldnamecall = hookmetamethod(game, "__namecall", clonefunction(newnamecall))
-            else
+            elseif hookfunction then
                 oldnamecall = hookfunction(getrawmetatable(game).__namecall,clonefunction(newnamecall))
             end
-            originalEvent = hookfunction(Instance.new("RemoteEvent").FireServer, clonefunction(newFireServer))
-            originalFunction = hookfunction(Instance.new("RemoteFunction").InvokeServer, clonefunction(newInvokeServer))
-            originalUnreliableEvent = hookfunction(Instance.new("UnreliableRemoteEvent").FireServer, clonefunction(newUnreliableFireServer))
+            if hookfunction then
+                originalEvent = hookfunction(Instance.new("RemoteEvent").FireServer, clonefunction(newFireServer))
+                originalFunction = hookfunction(Instance.new("RemoteFunction").InvokeServer, clonefunction(newInvokeServer))
+                originalUnreliableEvent = hookfunction(Instance.new("UnreliableRemoteEvent").FireServer, clonefunction(newUnreliableFireServer))
+            end
         end
         originalnamecall = originalnamecall or function(...)
             return oldnamecall(...)
