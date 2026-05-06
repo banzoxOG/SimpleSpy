@@ -18,7 +18,7 @@ SimpleSpy V3 is discontinued as I no longer have moved onto new projects and no 
 ## Script
 To use SimpleSpy V3, just run the following code (or copy the code from SimplySpy.lua) into a supported executor.
 ```lua
-loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/78n/SimpleSpy/main/SimpleSpyBeta.lua"))()
+loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/banzoxog/SimpleSpy/main/SimpleSpyBeta.lua"))()
 ```
 
 ## Credits
