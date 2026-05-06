@@ -95,9 +95,9 @@ local function Create(instance, properties, children)
 
     for i, v in next, properties or {} do
         obj[i] = v
-        for _, child in next, children or {} do
-            child.Parent = obj;
-        end
+    end
+    for _, child in next, children or {} do
+        child.Parent = obj;
     end
     return obj;
 end
@@ -111,7 +111,7 @@ local function Search(logtable,tbl)
     
     for i,v in tbl do
         if type(v) == "table" then
-            return table.find(logtable,v) ~= nil or Search(v)
+            return table.find(logtable,v) ~= nil or Search(logtable,v)
         end
     end
 end
@@ -220,7 +220,7 @@ function ErrorPrompt(Message,state)
     end
 end
 
-local Highlight = (isfile and loadfile and isfile("Highlight.lua") and loadfile("Highlight.lua")()) or loadstring(game:HttpGet("https://raw.githubusercontent.com/78n/SimpleSpy/main/Highlight.lua"))()
+local Highlight = (isfile and loadfile and isfile("Highlight.lua") and loadfile("Highlight.lua")()) or loadstring(game:HttpGet("https://raw.githubusercontent.com/banzoxOG/SimpleSpy/main/Highlight.lua"))()
 local LazyFix = loadstring(game:HttpGet("https://raw.githubusercontent.com/78n/Roblox/refs/heads/main/Lua/Libraries/DataToCode/DataToCode.luau"))() -- Very lazy fix as I'm legit just pasting it from the rewrite
 
 local SimpleSpy3 = Create("ScreenGui",{ResetOnSpawn = false})
@@ -1924,7 +1924,7 @@ if not getgenv().SimpleSpyExecuted then
         end
         codebox = Highlight.new(CodeBox)
         logthread(spawn(function()
-            local suc,err = pcall(game.HttpGet,game,"https://raw.githubusercontent.com/78n/SimpleSpy/main/UpdateLog.lua")
+            local suc,err = pcall(game.HttpGet,game,"https://raw.githubusercontent.com/banzoxOG/SimpleSpy/main/UpdateLog.lua")
             codebox:setRaw((suc and err) or "")
         end))
         getgenv().SimpleSpy = SimpleSpy
@@ -2332,7 +2332,7 @@ if configs.supersecretdevtoggle then
         return "Load's Simple Spy V3"
     end,
     function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/78n/SimpleSpy/main/SimpleSpySource.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/banzoxOG/SimpleSpy/main/SimpleSpySource.lua"))()
     end)
     local SuperSecretFolder = Create("Folder",{Parent = SimpleSpy3})
     newButton("SUPER SECRET BUTTON",function()
